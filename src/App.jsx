@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { useContext } from "react";
+import { UserContext } from "./context/AuthContext";
+import Home from "./pages/Home";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const { state } = useContext(UserContext);
   return (
-    <>
+    <div className="App">
+      <Home />
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {state.isAuthenticated ? (
+          <button
+            onClick={() => {
+              dispatch({ type: "LOGOUT" });
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <a href="http://localhost:3000/login">Login with Google</a>
+        )}
+
+        {state.isAuthenticated && (
+          <div>
+            <h2>Welcome {state.user.displayName}</h2>
+            <img src={state.user.picture} alt={state.user.displayName} />
+          </div>
+        )}
+
+        <pre>{JSON.stringify(state, null, 2)}</pre>
+
+        <footer>
+          <p>
+            This is a sample project to demonstrate how to use OAuth with Google
+            in a full-stack application.
+          </p>
+        </footer>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
