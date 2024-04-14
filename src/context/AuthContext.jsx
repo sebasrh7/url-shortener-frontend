@@ -1,7 +1,7 @@
 import { createContext, useReducer, useEffect } from "react";
 
 // Create a context to store the user data
-export const UserContext = createContext();
+export const AuthContext = createContext();
 
 // Initialize the user data from the local storage
 const initialState = {
@@ -25,8 +25,9 @@ const reducer = (state, action) => {
     case "PROFILE":
       return {
         ...state,
-        user: action.payload,
         isAuthenticated: true,
+        jwt: action.payload.jwt,
+        user: action.payload.user,
       };
     case "LOGOUT":
       localStorage.removeItem("jwt");
@@ -43,11 +44,11 @@ const reducer = (state, action) => {
 };
 
 // Create a provider to wrap the app and provide the user data
-export const UserProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   // Use the reducer to update the user data
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // // Save the user data to the local storage and update the state 
+  // // Save the user data to the local storage and update the state
   useEffect(() => {
     try {
       const loginInfo = new URLSearchParams(window.location.search).get(
@@ -66,17 +67,16 @@ export const UserProvider = ({ children }) => {
       const user = localStorage.getItem("user");
 
       if (jwt && user) {
-        dispatch({ type: "PROFILE", payload: JSON.parse(user) });
-      } 
-
+        dispatch({ type: "PROFILE", payload: { jwt, user: JSON.parse(user) } });
+      }
     } catch (error) {
       console.error(error);
     }
   }, []);
 
   return (
-    <UserContext.Provider value={{ state, dispatch }}>
+    <AuthContext.Provider value={{ state, dispatch }}>
       {children}
-    </UserContext.Provider>
+    </AuthContext.Provider>
   );
 };

@@ -1,10 +1,10 @@
 import "./App.css";
 import { useContext } from "react";
-import { UserContext } from "./context/AuthContext";
+import { AuthContext } from "./context/AuthContext";
 import Home from "./pages/Home";
 
 function App() {
-  const { state } = useContext(UserContext);
+  const { state, dispatch } = useContext(AuthContext);
   return (
     <div className="App">
       <Home />
