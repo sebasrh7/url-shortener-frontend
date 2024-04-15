@@ -20,14 +20,14 @@ const reducer = (state, action) => {
         ...state,
         isAuthenticated: true,
         jwt: action.payload.jwt,
-        user: action.payload.user,
+        user: JSON.parse(action.payload.user),
       };
     case "PROFILE":
       return {
         ...state,
         isAuthenticated: true,
         jwt: action.payload.jwt,
-        user: action.payload.user,
+        user: JSON.parse(action.payload.user),
       };
     case "LOGOUT":
       localStorage.removeItem("jwt");
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
       const user = localStorage.getItem("user");
 
       if (jwt && user) {
-        dispatch({ type: "PROFILE", payload: { jwt, user: JSON.parse(user) } });
+        dispatch({ type: "PROFILE", payload: { jwt, user } });
       }
     } catch (error) {
       console.error(error);
