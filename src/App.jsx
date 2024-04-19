@@ -1,14 +1,27 @@
-import "./App.css";
-import { useAuth } from "./hooks/useAuth";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
+import Index from "@/pages";
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useMemo } from "react";
 
 function App() {
-  const {
-    state: { isAuthenticated },
-  } = useAuth();
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? "dark" : "light",
+        },
+      }),
+    [prefersDarkMode]
+  );
+
   return (
-    <div className="App">{isAuthenticated ? <LoginPage /> : <HomePage />}</div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Index />
+    </ThemeProvider>
   );
 }
 

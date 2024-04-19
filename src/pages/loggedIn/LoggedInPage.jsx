@@ -1,27 +1,23 @@
-import { useAuth } from "../hooks/useAuth";
-import Grid from "../components/Grid";
+import { useAuth } from "@/hooks/auth/useAuth";
+import Grid from "./components/grid/Grid";
+import { Button } from "@mui/material";
 
-const LoginPage = () => {
+const LoggedInPage = () => {
   const {
     state: { user },
-    dispatch,
+    logout,
   } = useAuth();
 
   return (
     <div>
-      <button
-        onClick={() => {
-          dispatch({ type: "LOGOUT" });
-        }}
-      >
-        Logout
-      </button>
+      <header>
+        <Button onClick={logout}>Logout</Button>
+      </header>
 
       <div>
         <h2>Welcome {user.displayName}</h2>
         <img src={user.picture} alt={user.displayName} />
       </div>
-
       <Grid />
 
       <footer>
@@ -34,4 +30,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoggedInPage;
