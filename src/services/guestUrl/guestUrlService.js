@@ -6,6 +6,7 @@ export const guestShorten = (data) => {
     headers: {
       "Content-Type": "application/json",
     },
+    withCredentials: true,
     body: JSON.stringify(data),
   }).then((res) => res.json());
 };
