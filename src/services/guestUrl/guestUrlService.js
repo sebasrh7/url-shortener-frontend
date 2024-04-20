@@ -5,9 +5,7 @@ export const guestShorten = (data) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": `${API}`,
     },
-    withCredentials: true,
     body: JSON.stringify(data),
   }).then((res) => res.json());
 };
