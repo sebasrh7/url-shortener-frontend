@@ -1,9 +1,10 @@
+import LinkIcon from "@/components/icons/Link";
+import useGuestUrl from "@/hooks/guest/useGuestUrl";
+import { guestShorten } from "@/services/guestUrl/guestUrlService";
 import { Button, InputAdornment, TextField, styled } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./Shortener.css";
-import { guestShorten } from "@/services/guestUrl/guestUrlService";
-import useGuestUrl from "@/hooks/guest/useGuestUrl";
 
 const CssTextField = styled(TextField)({
   "& .MuiOutlinedInput-root": {
@@ -51,7 +52,13 @@ const Shortener = () => {
         error={!!formState.errors.originalUrl}
         helperText={formState.errors.originalUrl?.message}
         InputProps={{
-          startAdornment: <InputAdornment position="start">🔗</InputAdornment>,
+          startAdornment: (
+            <InputAdornment position="start">
+              <div className="icon-tada">
+                <LinkIcon width={20} height={20} />
+              </div>
+            </InputAdornment>
+          ),
           endAdornment: (
             <InputAdornment position="end">
               <Button

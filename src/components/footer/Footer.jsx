@@ -1,10 +1,17 @@
-import { Link, Typography } from "@mui/material";
+import { Link, Box, Typography } from "@mui/material";
 import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer>
-      <Typography variant="body1" color="textSecondary" sx={{ flexGrow: 1 }}>
+    <Box
+      paddingBlock={2}
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      component={"footer"}
+      position="fixed"
+    >
+      <Typography variant="body1" color="textSecondary">
         Made using{" "}
         <Link
           href="https://material-ui.com/"
@@ -14,7 +21,7 @@ const Footer = () => {
         >
           Material-UI
         </Link>{" "}
-        and{" "}
+        &{" "}
         <Link
           href="https://www.ag-grid.com/"
           target="_blank"
@@ -44,7 +51,7 @@ const Footer = () => {
           @sebasrh7
         </Link>
       </Typography>
-    </footer>
+    </Box>
   );
 };
 

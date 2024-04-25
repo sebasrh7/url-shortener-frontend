@@ -1,4 +1,37 @@
 .shortener {
-    max-width: 600px;
-    width: 100%;
+  max-width: 600px;
+  width: 100%;
+}
+
+.icon-tada {
+  display: flex;
+  transition: all 0.15s ease 0s;
+}
+.shortener:hover .icon-tada {
+  animation: tada-keyframes 3s ease infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes tada-keyframes {
+  0% {
+    transform: scaleX(1);
+  }
+  10%,
+  5% {
+    transform: scale3d(0.9, 0.9, 0.9) rotate(-5deg);
+  }
+  15%,
+  25%,
+  35%,
+  45% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate(5deg);
+  }
+  20%,
+  30%,
+  40% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate(-5deg);
+  }
+  50% {
+    transform: scaleX(1);
+  }
 }
