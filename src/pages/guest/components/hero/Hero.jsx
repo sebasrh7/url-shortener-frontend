@@ -1,18 +1,17 @@
-import Shortener from "../shortener/Shortener";
-import { Typography } from "@mui/material";
+import { Typography, useMediaQuery } from "@mui/material";
 import "./Hero.css";
-import Url from "../url/Url";
+import { Box } from "@mui/material";
 
 const Hero = () => {
   return (
-    <div className="hero">
-      <Typography variant="h1">Shorten Your Long Urls :D</Typography>
-      <Typography variant="body1">
+    <Box component={"section"} className="hero" display="flex" flexDirection="column" gap={2}>
+      <Typography variant="h1" textAlign="center" className="hero-title">
+        Shorten Your Looooong Urls :D
+      </Typography>
+      <Typography variant="body1" textAlign="center" className="hero-description">
         URL Shortener is an efficient and easy-to-use URL shortening service.
       </Typography>
-      <Shortener />
-      <Url />
-    </div>
+    </Box>
   );
 };
 
