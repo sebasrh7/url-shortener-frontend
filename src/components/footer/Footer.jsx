@@ -1,56 +1,66 @@
-import { Link, Box, Typography } from "@mui/material";
+import { Link, Box, Typography, Toolbar } from "@mui/material";
 import "./Footer.css";
 
+const madeUsing = [
+  {
+    name: "React",
+    url: "https://react.dev/",
+  },
+  {
+    name: "Material-UI",
+    url: "https://material-ui.com/",
+  },
+  {
+    name: "AG Grid",
+    url: "https://www.ag-grid.com/",
+  },
+  {
+    name: "Tabler Icons",
+    url: "https://tabler.io/",
+  },
+];
+
+const sourceCode = [
+  {
+    name: "Source Code",
+    url: "https://github.com/sebasrh7/url-shortener",
+  },
+  {
+    name: "@sebasrh7",
+    url: "https://github.com/sebasrh7",
+  },
+];
+
+const showLinks = (links) => {
+  const lastIndex = links.length - 1;
+  return links.map((link, index) => (
+    <Box key={link.name} component="span">
+      <Link
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        underline="hover"
+      >
+        {link.name}
+      </Link>
+      {index < lastIndex - 1 && ", "}
+      {index === lastIndex - 1 && links.length > 2 && " & "}
+      {index === lastIndex - 1 && links.length === 2 && " | "}
+    </Box>
+  ));
+};
 const Footer = () => {
   return (
-    <Box
-      paddingBlock={2}
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
-      component={"footer"}
-      position="fixed"
-    >
-      <Typography variant="body1" color="textSecondary">
-        Made using{" "}
-        <Link
-          href="https://material-ui.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          underline="hover"
-        >
-          Material-UI
-        </Link>{" "}
-        &{" "}
-        <Link
-          href="https://www.ag-grid.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          underline="hover"
-        >
-          AG Grid
-        </Link>
-      </Typography>
+    <Box component="footer" className="footer">
+      <Toolbar className="footer-content">
+        <Typography variant="body1" color="textSecondary" sx={{ flexGrow: 1 }}>
+          Made using {showLinks(madeUsing)}
+        </Typography>
 
-      <Typography variant="body1" color="textSecondary">
-        <Link
-          href="https://github.com/sebasrh7/url-shortener"
-          target="_blank"
-          rel="noopener noreferrer"
-          underline="hover"
-        >
-          Source Code
-        </Link>{" "}
-        by{" "}
-        <Link
-          href="https://github.com/sebasrh7"
-          target="_blank"
-          rel="noopener noreferrer"
-          underline="hover"
-        >
-          @sebasrh7
-        </Link>
-      </Typography>
+        <Typography variant="body1" color="textSecondary">
+          {showLinks(sourceCode)}
+        </Typography>
+      </Toolbar>
     </Box>
   );
 };

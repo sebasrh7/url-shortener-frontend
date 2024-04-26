@@ -1,4 +1,4 @@
-const Wink = (props) => (
+const SunIcon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -9,15 +9,13 @@ const Wink = (props) => (
     strokeWidth={2}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="icon icon-tabler icons-tabler-outline icon-tabler-mood-wink"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-sun"
     {...props}
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-    <path d="M15 10h.01" />
-    <path d="M9.5 15a3.5 3.5 0 0 0 5 0" />
-    <path d="M8.5 8.5l1.5 1.5l-1.5 1.5" />
+    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
   </svg>
 );
 
-export default Wink;
+export default SunIcon;

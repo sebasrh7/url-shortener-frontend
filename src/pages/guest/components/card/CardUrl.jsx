@@ -7,27 +7,20 @@ const CardUrl = () => {
   const { url } = useGuestUrl();
 
   return (
-    <>
-      <Box
-        component={Paper}
-        p={2}
-        maxWidth={400}
-        width="100%"
-        minHeight={"min-content"}
-        height="100%"
-      >
-        <Typography variant="h6">
-          {url ? "Your Shortened URL" : "Shorten your URL to get started"}
-        </Typography>
-
-        {url && (
+    <Box component={"section"} maxWidth={600} marginInline={"auto"} >
+      {url && (
+        <Box
+          component={Paper}
+          p={2}
+          elevation={3}
+          display="flex"
+          flexDirection="column"
+          gap={1}
+        >
           <Box
             display="flex"
-            flexDirection={"column"}
-            alignItems={"start"}
-            width="100%"
-            mt={2}
-            gap={1}
+            alignItems="center"
+            justifyContent={"space-between"}
           >
             <Link
               href={url.shortUrl}
@@ -39,21 +32,27 @@ const CardUrl = () => {
               <span className="shorturlid">/</span>
               {url.shortUrlId}
             </Link>
-
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              noWrap
-              width="100%"
-              title={url.originalUrl}
-              align="start"
+            <IconButton
+              aria-label="copy"
+              onClick={() => navigator.clipboard.writeText(url.shortUrl)}
             >
-              {url.originalUrl}
-            </Typography>
+              <CopyIcon />
+            </IconButton>
           </Box>
-        )}
-      </Box>
-    </>
+
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            noWrap
+            width="100%"
+            title={url.originalUrl}
+            align="start"
+          >
+            {url.originalUrl}
+          </Typography>
+        </Box>
+      )}
+    </Box>
   );
 };
 
