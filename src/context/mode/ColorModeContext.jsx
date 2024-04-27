@@ -23,7 +23,6 @@ export const ColorModeProvider = ({ children }) => {
         mode,
       },
       typography: {
-        fontFamily: ["Poppins", "sans-serif"].join(","),
         h1: {
           fontSize: "4.5rem",
           "@media (max-width:900px)": {
@@ -44,6 +43,9 @@ export const ColorModeProvider = ({ children }) => {
           "@media (max-width:600px)": {
             fontSize: "1rem",
           },
+          "@media (max-width:400px)": {
+            fontSize: "0.75rem",
+          },
         },
         body1: {
           fontSize: "1rem",
@@ -53,6 +55,9 @@ export const ColorModeProvider = ({ children }) => {
           "@media (max-width:600px)": {
             fontSize: "0.75rem",
           },
+          "@media (max-width:400px)": {
+            fontSize: "0.625rem",
+          },
         },
         body2: {
           fontSize: "0.875rem",
@@ -61,6 +66,21 @@ export const ColorModeProvider = ({ children }) => {
           },
           "@media (max-width:600px)": {
             fontSize: "0.625rem",
+          },
+          "@media (max-width:400px)": {
+            fontSize: "0.5rem",
+          },
+        },
+        overline: {
+          fontSize: "0.75rem",
+          "@media (max-width:900px)": {
+            fontSize: "0.625rem",
+          },
+          "@media (max-width:600px)": {
+            fontSize: "0.5rem",
+          },
+          "@media (max-width:400px)": {
+            fontSize: "0.375rem",
           },
         },
       },

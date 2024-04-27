@@ -1,4 +1,3 @@
-import Footer from "@/components/footer/Footer";
 import { Container } from "@mui/material";
 import "./GuestPage.css";
 import CardUrl from "./components/card/CardUrl";
@@ -14,7 +13,6 @@ const GuestPage = () => {
         <Shortener />
         <CardUrl />
       </Container>
-      <Footer />
     </>
   );
 };
