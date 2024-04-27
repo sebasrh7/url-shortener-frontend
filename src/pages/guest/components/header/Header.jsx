@@ -22,6 +22,7 @@ const Header = () => {
       <Toolbar className="header-toolbar">
         <Typography
           variant="h6"
+          fontWeight={700}
           sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 1 }}
         >
           <LinkIcon />
