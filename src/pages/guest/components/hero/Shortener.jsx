@@ -1,24 +1,9 @@
 import LinkIcon from "@/components/icons/Link";
 import useGuestUrl from "@/hooks/guest/useGuestUrl";
 import { guestShorten } from "@/services/guestUrl/guestUrlService";
-import { Box, Button, InputAdornment, TextField, styled } from "@mui/material";
+import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import "./Shortener.css";
-
-const CssTextField = styled(TextField)({
-  // "& .MuiOutlinedInput-root": {
-  //   "& fieldset": {
-  //     borderColor: " #eee",
-  //   },
-  //   "&:hover fieldset": {
-  //     borderColor: " #9c27b0",
-  //   },
-  //   "&.Mui-focused fieldset": {
-  //     borderColor: " #9c27b0",
-  //   },
-  // },
-});
 
 const Shortener = () => {
   const { register, handleSubmit, reset, formState } = useForm();
@@ -39,9 +24,15 @@ const Shortener = () => {
   };
 
   return (
-    <Box component={"section"} marginInline={"auto"} maxWidth={600} className="shortener" >
+    <Box
+      component={"section"}
+      marginInline={"auto"}
+      maxWidth={700}
+      className="shortener"
+      marginBottom={1}
+    >
       <form className="shortener" onSubmit={handleSubmit(onSubmit)}>
-        <CssTextField
+        <TextField
           id="originalUrl"
           placeholder="https://"
           variant="outlined"
