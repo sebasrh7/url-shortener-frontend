@@ -1,18 +1,16 @@
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
 import "./GuestPage.css";
-import CardUrl from "./components/card/CardUrl";
 import Header from "./components/header/Header";
 import Hero from "./components/hero/Hero";
-import Shortener from "./components/shortener/Shortener";
+import Features from "./components/features/Features";
 const GuestPage = () => {
   return (
     <>
       <Header />
-      <Container component={"main"} className="guest-page">
+      <Box component={"main"} className="guest-page">
         <Hero />
-        <Shortener />
-        <CardUrl />
-      </Container>
+        {/* <Features /> */}
+      </Box>
     </>
   );
 };

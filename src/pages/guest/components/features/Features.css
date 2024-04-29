@@ -1,11 +1,9 @@
-.footer {
-  margin-top: auto;
+.features {
   padding-block: 48px;
-  padding-inline: 24px;
 }
 
 @media (min-width: 640px) {
-  .footer {
+  .features {
     padding-block: 72px;
   }
 }

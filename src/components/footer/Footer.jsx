@@ -3,10 +3,10 @@ import {
   Grid,
   List,
   ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   Typography,
-  Container,
 } from "@mui/material";
 import EmailIcon from "../icons/Email";
 import GithubIcon from "../icons/Github";
@@ -33,7 +33,7 @@ const madeUsing = [
   {
     id: 4,
     name: "Tabler Icons",
-    url: "https://tabler.io/",
+    url: "https://tabler.io/icons",
   },
 ];
 
@@ -73,89 +73,95 @@ const contact = [
 
 const Footer = () => {
   return (
-    <Box component="footer" className="footer">
-      <Container className="footer-content">
-        <Grid container justifyContent={"space-between"} spacing={2}>
-          <Grid item xs={12} md={4}>
-            <Typography
-              variant="h6"
-              fontWeight={700}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
-              <LinkIcon />
-              Shorten URL
-            </Typography>
+    <Box
+      component="footer"
+      className="footer"
+      bgcolor={"primary.dark"}
+      color={"primary.contrastText"}
+    >
+      <Grid container justifyContent={"space-between"} spacing={2}>
+        <Grid item xs={12} md={4}>
+          <Typography
+            variant="h4"
+            fontWeight={700}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <LinkIcon width={32} height={32} />
+            Shorten URL
+          </Typography>
 
-            {/* Descripcion */}
-            <Typography variant="body1" mt={2}>
-              A free URL shortening service that allows you to share links on
-              different platforms.
-            </Typography>
+          {/* Descripcion */}
+          <Typography variant="body1" mt={2}>
+            A free URL shortening service that allows you to share links on
+            different platforms.
+          </Typography>
 
-            <Typography variant="body2" color="textSecondary" mt={2}>
-              &copy; {new Date().getFullYear()} Some rights reserved.
-            </Typography>
-          </Grid>
+          <Typography variant="body2" mt={2} color={"primary.light"}>
+            &copy; {new Date().getFullYear()} Some rights reserved.
+          </Typography>
+        </Grid>
 
-          <Grid item xs={12} md={6}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={4}>
-                <List disablePadding={true}>
-                  <ListItem>
-                    <Typography variant="overline" fontWeight="bold">
-                      Made using
-                    </Typography>
-                  </ListItem>
-                  {madeUsing.map((item) => (
-                    <ListItem
-                      key={item.id}
-                      button
+        <Grid item xs={12} md={6}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={4}>
+              <List disablePadding>
+                <ListItem sx={{ paddingBlock: "2px", paddingInline: "12px" }}>
+                  <Typography variant="overline" fontWeight="bold">
+                    Made using
+                  </Typography>
+                </ListItem>
+                {madeUsing.map((item) => (
+                  <ListItem key={item.id} disablePadding>
+                    <ListItemButton
+                      sx={{ paddingBlock: "2px", paddingInline: "12px" }}
                       component="a"
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <ListItemText>{item.name}</ListItemText>
-                    </ListItem>
-                  ))}
-                </List>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <List disablePadding={true}>
-                  <ListItem>
-                    <Typography variant="overline" fontWeight="bold">
-                      Source Code
-                    </Typography>
+                      <ListItemText primary={item.name} />
+                    </ListItemButton>
                   </ListItem>
-                  {sourceCode.map((item) => (
-                    <ListItem
-                      key={item.id}
-                      button
+                ))}
+              </List>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <List disablePadding>
+                <ListItem sx={{ paddingBlock: "2px", paddingInline: "12px" }}>
+                  <Typography variant="overline" fontWeight="bold">
+                    Source Code
+                  </Typography>
+                </ListItem>
+                {sourceCode.map((item) => (
+                  <ListItem key={item.id} disablePadding>
+                    <ListItemButton
+                      sx={{ paddingBlock: "2px", paddingInline: "12px" }}
                       component="a"
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <ListItemText>{item.name}</ListItemText>
-                    </ListItem>
-                  ))}
-                </List>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <List disablePadding={true}>
-                  <ListItem>
-                    <Typography variant="overline" fontWeight="bold">
-                      Contact
-                    </Typography>
+                      <ListItemText primary={item.name} />
+                    </ListItemButton>
                   </ListItem>
-                  {contact.map((item) => (
-                    <ListItem
-                      key={item.id}
-                      button
+                ))}
+              </List>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <List disablePadding>
+                <ListItem sx={{ paddingBlock: "2px", paddingInline: "12px" }}>
+                  <Typography variant="overline" fontWeight="bold">
+                    Contact
+                  </Typography>
+                </ListItem>
+                {contact.map((item) => (
+                  <ListItem key={item.id} disablePadding>
+                    <ListItemButton
+                      sx={{ paddingBlock: "2px", paddingInline: "12px" }}
                       component="a"
                       href={item.url}
                       target="_blank"
@@ -164,15 +170,15 @@ const Footer = () => {
                       <ListItemIcon sx={{ minWidth: "auto", mr: 1 }}>
                         {item.icon}
                       </ListItemIcon>
-                      <ListItemText>{item.name}</ListItemText>
-                    </ListItem>
-                  ))}
-                </List>
-              </Grid>
+                      <ListItemText primary={item.name} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
             </Grid>
           </Grid>
         </Grid>
-      </Container>
+      </Grid>
     </Box>
   );
 };

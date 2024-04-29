@@ -1,4 +1,6 @@
 import LinkIcon from "@/components/icons/Link";
+import MoonIcon from "@/components/icons/Moon";
+import SunIcon from "@/components/icons/Sun";
 import { useAuth } from "@/hooks/auth/useAuth";
 import { useColorMode } from "@/hooks/mode/useColorMode";
 import {
@@ -10,15 +12,18 @@ import {
   Typography,
 } from "@mui/material";
 import "./Header.css";
-import MoonIcon from "@/components/icons/Moon";
-import SunIcon from "@/components/icons/Sun";
 
 const Header = () => {
   const { login } = useAuth();
   const { theme, colorMode } = useColorMode();
 
   return (
-    <AppBar position="static" >
+    <AppBar
+      position="static"
+      color="transparent"
+      elevation={0}
+      className="header"
+    >
       <Toolbar className="header-toolbar">
         <Typography
           variant="h6"
@@ -28,21 +33,15 @@ const Header = () => {
           <LinkIcon />
           Shorten URL
         </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          {theme.palette.mode} mode
-          <IconButton onClick={colorMode.toggleColorMode}>
-            {theme.palette.mode === "light" ? <MoonIcon/> : <SunIcon />}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          {/* <Button color="inherit" variant="outlined" onClick={login}>
+            Login
+          </Button> */}
+
+          <IconButton onClick={colorMode.toggleColorMode} color="inherit">
+            {theme.palette.mode === "light" ? <MoonIcon /> : <SunIcon />}
           </IconButton>
         </Box>
-        {/* <Button color="inherit" variant="outlined" onClick={login}>
-          Login
-        </Button> */}
       </Toolbar>
     </AppBar>
   );
