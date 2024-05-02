@@ -76,8 +76,8 @@ const Footer = () => {
     <Box
       component="footer"
       className="footer"
-      bgcolor={"primary.dark"}
-      color={"primary.contrastText"}
+      borderTop={1}
+      borderColor={"divider"}
     >
       <Grid container justifyContent={"space-between"} spacing={2}>
         <Grid item xs={12} md={4}>
@@ -100,7 +100,7 @@ const Footer = () => {
             different platforms.
           </Typography>
 
-          <Typography variant="body2" mt={2} color={"primary.light"}>
+          <Typography variant="body2" mt={2} color={"text.secondary"}>
             &copy; {new Date().getFullYear()} Some rights reserved.
           </Typography>
         </Grid>
