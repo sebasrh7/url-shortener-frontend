@@ -1,14 +1,27 @@
 import LinkIcon from "@/components/icons/Link";
 import useGuestUrl from "@/hooks/guest/useGuestUrl";
 import { guestShorten } from "@/services/guestUrl/guestUrlService";
-import { Box, Button, InputAdornment, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  Snackbar,
+  TextField,
+  CircularProgress,
+} from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Shortener = () => {
   const { register, handleSubmit, reset, formState } = useForm();
   const [loading, setLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const { setUrl } = useGuestUrl();
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -17,9 +30,14 @@ const Shortener = () => {
       setUrl(response);
       reset();
       setLoading(false);
+      setSnackbarMessage("URL shortened successfully");
+      setSnackbarOpen(true);
     } catch (error) {
       console.error(error);
+      reset();
       setLoading(false);
+      setSnackbarMessage("Failed to shorten URL");
+      setSnackbarOpen(true);
     }
   };
 
@@ -54,18 +72,26 @@ const Shortener = () => {
             endAdornment: (
               <InputAdornment position="end">
                 <Button
-                  variant="outlined"
-                  color="inherit"
+                  variant="contained"
+                  color="primary"
                   type="submit"
                   disabled={loading}
+                  sx={{ minWidth: 100 }}
                 >
-                  Shorten
+                  {loading ? <CircularProgress size={24} /> : "Shorten"}
                 </Button>
               </InputAdornment>
             ),
           }}
         />
       </form>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        message={snackbarMessage}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      />
     </Box>
   );
 };
