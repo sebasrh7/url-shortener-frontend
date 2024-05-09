@@ -6,7 +6,11 @@ import Shortener from "./Shortener";
 
 const Hero = () => {
   return (
-    <Box component={"section"} className="hero" bgcolor={""}>
+    <Box
+      component={"section"}
+      className="hero"
+     
+    >
       <Container>
         <SectionHeader />
         <Shortener />

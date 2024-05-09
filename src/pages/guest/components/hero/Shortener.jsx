@@ -42,14 +42,15 @@ const Shortener = () => {
   };
 
   return (
-    <Box
-      component={"section"}
-      marginInline={"auto"}
-      maxWidth={700}
-      className="shortener"
-      marginBottom={1}
-    >
-      <form className="shortener" onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <Box
+        component={"form"}
+        onSubmit={handleSubmit(onSubmit)}
+        maxWidth={700}
+        className="shortener"
+        marginInline={"auto"}
+        marginBottom={1}
+      >
         <TextField
           id="originalUrl"
           placeholder="https://"
@@ -64,19 +65,17 @@ const Shortener = () => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <div className="icon-tada">
-                  <LinkIcon width={20} height={20} />
-                </div>
+                <LinkIcon width={20} height={20} className="icon-tada" />
               </InputAdornment>
             ),
             endAdornment: (
               <InputAdornment position="end">
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   type="submit"
                   disabled={loading}
-                  sx={{ minWidth: 100 }}
+                  sx={{ minWidth: 100, color: "secondary.contrastText" }}
                 >
                   {loading ? <CircularProgress size={24} /> : "Shorten"}
                 </Button>
@@ -84,7 +83,7 @@ const Shortener = () => {
             ),
           }}
         />
-      </form>
+      </Box>
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={3000}
@@ -92,7 +91,7 @@ const Shortener = () => {
         message={snackbarMessage}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       />
-    </Box>
+    </>
   );
 };
 
