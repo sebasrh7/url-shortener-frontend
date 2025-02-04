@@ -49,9 +49,9 @@ const Features = () => {
   ];
   const { login } = useAuth();
   return (
-    <Box component="section" className="features" bgcolor={"secondary.light"} >
+    <Box component="section" className="features">
       <Container>
-        <Box sx={{ mb: 4 }} color={"secondary.contrastText"}>
+        <Box sx={{ mb: 4 }} >
           <Typography variant="h4" align="center">
             Features
           </Typography>
@@ -60,7 +60,7 @@ const Features = () => {
           </Typography>
 
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Button color="inherit" variant="outlined" onClick={login}>
+            <Button color="inherit" variant="text" onClick={login}>
               Login
             </Button>
           </Box>

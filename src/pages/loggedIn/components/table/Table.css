@@ -1,0 +1,9 @@
+.table {
+  padding-block: 48px;
+}
+
+@media (min-width: 640px) {
+  .table {
+    padding-block: 72px;
+  }
+}

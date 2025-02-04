@@ -1,23 +1,22 @@
 import LinkIcon from "@/components/icons/Link";
-import useGuestUrl from "@/hooks/guest/useGuestUrl";
-import { guestShorten } from "@/services/guestUrl/guestUrlService";
+import useUrl from "@/hooks/url/useUrl";
 import {
   Box,
   Button,
+  CircularProgress,
   InputAdornment,
   Snackbar,
   TextField,
-  CircularProgress,
 } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import "./Header.css";
 
 const Shortener = () => {
   const { register, handleSubmit, reset, formState } = useForm();
-  const [loading, setLoading] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const { setUrl } = useGuestUrl();
+  const { loading, createShortUrl } = useUrl();
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
@@ -25,17 +24,13 @@ const Shortener = () => {
 
   const onSubmit = async (data) => {
     try {
-      setLoading(true);
-      const response = await guestShorten(data);
-      setUrl(response);
+      await createShortUrl(data.originalUrl);
       reset();
-      setLoading(false);
       setSnackbarMessage("URL shortened successfully");
       setSnackbarOpen(true);
     } catch (error) {
       console.error(error);
       reset();
-      setLoading(false);
       setSnackbarMessage("Failed to shorten URL");
       setSnackbarOpen(true);
     }
@@ -46,10 +41,8 @@ const Shortener = () => {
       <Box
         component={"form"}
         onSubmit={handleSubmit(onSubmit)}
-        maxWidth={700}
+        width="100%"
         className="shortener"
-        marginInline={"auto"}
-        marginBottom={1}
       >
         <TextField
           id="originalUrl"
@@ -72,10 +65,9 @@ const Shortener = () => {
               <InputAdornment position="end">
                 <Button
                   variant="contained"
-                  color="secondary"
                   type="submit"
                   disabled={loading}
-                  sx={{ minWidth: 100, color: "secondary.contrastText" }}
+                  sx={{ minWidth: 100 }}
                 >
                   {loading ? <CircularProgress size={24} /> : "Shorten"}
                 </Button>

@@ -1,5 +1,5 @@
 import { initialState, reducer } from "@/reducer/auth/AuthReducer";
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 // Create a context to store the user data
 export const AuthContext = createContext();
@@ -8,6 +8,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // Use the reducer to update the user data
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [loading, setLoading] = useState(true);
 
   // Save the user data to the local storage and update the state
   useEffect(() => {
@@ -19,17 +20,18 @@ export const AuthProvider = ({ children }) => {
       if (loginInfo) {
         const { jwt, user } = JSON.parse(loginInfo);
         dispatch({ type: "LOGIN", payload: { jwt, user } });
-
         // Remove loginInfo from URL
         window.history.replaceState({}, document.title, "/");
+      } else {
+        const jwt = localStorage.getItem("jwt");
+        const user = localStorage.getItem("user");
+
+        if (jwt && user) {
+          dispatch({ type: "PROFILE", payload: { jwt, user } });
+        }
       }
 
-      const jwt = localStorage.getItem("jwt");
-      const user = localStorage.getItem("user");
-
-      if (jwt && user) {
-        dispatch({ type: "PROFILE", payload: { jwt, user } });
-      }
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -47,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ state, dispatch, login, logout }}>
+    <AuthContext.Provider value={{ state, dispatch, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
