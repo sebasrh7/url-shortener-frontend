@@ -1,38 +1,89 @@
-import { Url } from "@/data/MOCK_DATA"; // Mock Data
+import useUrl from "@/hooks/url/useUrl";
+import { Box, Button } from "@mui/material";
 import { useState } from "react"; // React Hooks
 
 const useTable = () => {
-  const [rows, setRows] = useState(Url);
+  const {
+    rows,
+    setRows,
+    loading,
+    error,
+    fetchUrl,
+    editUrl,
+    removeUrl,
+    removeUrls,
+  } = useUrl();
+
   const columns = [
     // checkbox selection column for selecting rows in the table
     { field: "originalUrl", headerName: "URL", flex: 2, type: "string" },
     { field: "shortUrl", headerName: "Short URL", flex: 1, type: "string" },
     {
+      field: "clicks",
+      headerName: "Clicks",
+      flex: 1,
+      type: "number",
+    },
+    {
       field: "date",
       headerName: "Date",
       flex: 1,
-      valueFormatter: (value) => {
-        // Dividir la cadena en sus componentes (mes, día, año) usando '/'
-        const parts = value.split("/");
-
-        // Extraer el mes, día y año de las partes
-        const month = parseInt(parts[0]);
-        const day = parseInt(parts[1]);
-        const year = parseInt(parts[2]);
-
-        // Crear el objeto Date con el orden de día, mes y año
-        const date = new Date(year, month - 1, day);
-
-        // Formatear la fecha como dd/mm/aaaa
-        const formattedDate = `${day.toString().padStart(2, "0")}/${month
-          .toString()
-          .padStart(2, "0")}/${year}`;
-
-        return formattedDate;
+      valueGetter: (value) => {
+        return new Date(value);
       },
       type: "date",
     },
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: 1,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+        return (
+          <Box style={{ display: "flex", gap: "8px" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={() => {
+                handleEditRow(params.row.id);
+              }}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="small"
+              onClick={() => {
+                handleDeleteRow(params.row.id);
+              }}
+            >
+              Delete
+            </Button>
+          </Box>
+        );
+      },
+      type: "actions",
+    },
   ];
+
+  const handleDeleteRow = async (id) => {
+    console.log("Row to delete:", id);
+
+    setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+
+    const data = await removeUrl(id);
+    console.log("Deleted data:", data);
+  };
+
+  const handleEditRow = async (id, editData) => {
+    console.log("Row to edit:", id);
+    const data = await fetchUrl(id);
+    console.log("Edit data:", data);
+    const updatedData = await editUrl(id, editData);
+    console.log("Updated data:", updatedData);
+  };
 
   const [selectionModel, setSelectionModel] = useState([]);
 
@@ -40,18 +91,22 @@ const useTable = () => {
     setSelectionModel(newSelection);
   };
 
-  const handleDeleteRows = () => {
-    // Elimina las filas seleccionadas de los datos
-    // Aquí puedes implementar la lógica para eliminar las filas de tu fuente de datos
-    // Por ejemplo, si 'rows' es un array de objetos, puedes filtrar los objetos no seleccionados
-    // y establecer el nuevo array de filas sin las filas seleccionadas.
+  const handleDeleteRows = async () => {
     console.log("Rows to delete:", selectionModel);
     setRows((prevRows) =>
       prevRows.filter((row) => !selectionModel.includes(row.id))
     );
+
+    const ids = {
+      selectedIds: selectionModel,
+    };
+
+    const data = await removeUrls(ids);
+    console.log("Deleted data:", data);
   };
 
   return {
+    loading,
     rows,
     columns,
     selectionModel,

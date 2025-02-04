@@ -9,6 +9,8 @@ import {
   Tooltip,
   Typography,
   Pagination,
+  AppBar,
+  Toolbar,
 } from "@mui/material";
 import {
   DataGrid,
@@ -21,7 +23,7 @@ import {
 } from "@mui/x-data-grid";
 import "./Table.css";
 
-function CustomNoRowsOverlay() {
+const CustomNoRowsOverlay = () => {
   return (
     <Box
       sx={{
@@ -32,22 +34,20 @@ function CustomNoRowsOverlay() {
         height: "100%",
       }}
     >
-      <InboxIcon width={140} height={140} />
+      <InboxIcon width={120} height={120} />
 
       <Box sx={{ mt: 1 }}>No Rows</Box>
     </Box>
   );
-}
+};
 
-const CustomToolbar = ({ onDelete, isSelect }) => {
+const CustomToolbar = ({ onDelete, isSelect, count }) => {
   return (
     <GridToolbarContainer
       sx={{
         paddingInline: 2,
         paddingTop: 0,
         height: 52,
-        // borderBottom: 1,
-        // borderColor: "divider",
       }}
     >
       <Box sx={{ flexGrow: 1 }}>
@@ -66,7 +66,7 @@ const CustomToolbar = ({ onDelete, isSelect }) => {
         )}
       </Box>
       <Box>
-        <Typography variant="h6">Table</Typography>
+        <Typography variant="h6">History ({count})</Typography>
       </Box>
     </GridToolbarContainer>
   );
@@ -94,14 +94,19 @@ const CustomPaginationActions = ({ page, onPageChange, className }) => {
   );
 };
 
-const CustomPagination = ({ ...props }) => {
+const CustomPagination = ({ count, ...props }) => {
   return (
-    <GridPagination ActionsComponent={CustomPaginationActions} {...props} />
+    <>
+      {count > 0 && (
+        <GridPagination ActionsComponent={CustomPaginationActions} {...props} />
+      )}
+    </>
   );
 };
 
 const Table = () => {
   const {
+    loading,
     rows,
     columns,
     handleDeleteRows,
@@ -126,27 +131,31 @@ const Table = () => {
               toolbar: {
                 onDelete: handleDeleteRows,
                 isSelect: selectionModel.length > 0,
+                count: rows.length,
               },
               pagination: {
-                rows: rows,
+                count: rows.length,
               },
             }}
             onRowSelectionModelChange={handleSelectionModelChange}
             columns={columns}
             rows={rows}
-            autoHeight
             disableColumnResize
             checkboxSelection
             disableRowSelectionOnClick
             disableColumnSelector
             disableColumnMenu
-            //loading={rows.length === 0}
+            autoHeight
+            loading={loading}
             initialState={{
               pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
+                paginationModel: { page: 0, pageSize: 10 },
+              },
+              sorting: {
+                columns: [{ field: "date", sort: "desc" }],
               },
             }}
-            pageSizeOptions={[5, 10]}
+            pageSizeOptions={[10, 20, 30]}
             sx={{
               "--DataGrid-overlayHeight": "260px",
             }}

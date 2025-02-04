@@ -20,15 +20,13 @@ const Header = () => {
   return (
     <Box component={"header"} height={64}>
       <AppBar position="fixed" elevation={0}>
-       
         <Toolbar className="header-toolbar">
           <Typography
             variant="h6"
             fontWeight={700}
-            sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 1 }}
+            sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}
           >
-            <LinkIcon />
-            Shorten URL
+            URL Shortener
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Button color="inherit" variant="text" onClick={login}>

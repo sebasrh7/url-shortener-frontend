@@ -91,7 +91,7 @@ const Footer = () => {
             }}
           >
             <LinkIcon width={32} height={32} />
-            Shorten URL
+            URL Shortener
           </Typography>
 
           {/* Descripcion */}

@@ -1,7 +1,7 @@
 const API = import.meta.env.VITE_API_URL;
 
-export const guestShorten = (data) => {
-  return fetch(`${API}/guest/shorten`, {
+export const guestShorten = async (data) => {
+  return await fetch(`${API}/guest/shorten`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

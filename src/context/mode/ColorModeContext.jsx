@@ -64,13 +64,13 @@ export const ColorModeProvider = ({ children }) => {
 
               "& .MuiDataGrid-columnHeader": {
                 //backgroundColor:
-                 // mode === "light" ? colors.grey[50] : colors.grey[800],
+                // mode === "light" ? colors.grey[50] : colors.grey[800],
 
                 "&:focus-within": {
                   outline: "none",
                 },
               },
-           
+
               "& .MuiDataGrid-row": {
                 //backgroundColor:
                 //  mode === "light" ? colors.common.white : colors.grey[700],
@@ -103,7 +103,7 @@ export const ColorModeProvider = ({ children }) => {
                 border: "none",
               },
               "& .MuiInputBase-input:-webkit-autofill": {
-                "-webkit-box-shadow": `0 0 0 100px ${
+                WebkitBoxShadow: `0 0 0 100px ${
                   mode === "light" ? colors.common.white : colors.grey[800]
                 } inset`,
               },
